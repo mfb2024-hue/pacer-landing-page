@@ -33,17 +33,105 @@ CITY_COORDS = {
 }
 
 CITY_SPOTS = {
-    "Bangalore":[("Cubbon Park","12.9763,77.5929","5.8km loop, shaded, best before 7am"),("Lalbagh Garden","12.9507,77.5848","3km loop, flat, opens 6am"),("Ulsoor Lake","12.9815,77.6214","2km loop, central, 5:30-7am"),("Nandi Hills","13.3702,77.6835","Trail runs, cool climate")],
-    "Mumbai":[("Marine Drive","18.9322,72.8264","3.6km stretch, sea breeze, best before 7am"),("Carter Road Bandra","19.0728,72.8286","1km promenade, popular 5:30-7am"),("Sanjay Gandhi NP","19.2147,72.9110","Trail running, early morning only"),("Powai Lake","19.1196,72.9089","4km loop, 5:30-7am")],
-    "Delhi":[("Lodhi Garden","28.5931,77.2197","2.1km loop, historic, opens 5am"),("Siri Fort","28.5491,77.2226","3km track, well lit, popular"),("Nehru Park","28.5963,77.1940","1.5km loop, shaded, safe"),("India Gate","28.6129,77.2295","Road loop, iconic, early morning only")],
-    "Hyderabad":[("KBR National Park","17.4156,78.4347","3km trail, forest cover, opens 5am"),("Hussain Sagar Lake","17.4239,78.4738","5km loop, popular, early morning"),("Necklace Road","17.4126,78.4680","3km stretch, lake views, 5:30-7am"),("Durgam Cheruvu","17.4344,78.3876","Trail loop, rocky terrain, peaceful")],
-    "Chennai":[("Marina Beach","13.0500,80.2824","13km stretch, flat, best before 6:30am"),("Besant Nagar Beach","13.0002,80.2707","2km stretch, less crowded"),("Guindy National Park","13.0067,80.2206","Forest trail, opens 8am, shaded"),("Adyar River walk","13.0067,80.2353","Riverside path, quiet morning")],
-    "Pune":[("Bund Garden","18.5359,73.8794","1.5km loop, riverside, good track"),("Pune University","18.5590,73.8252","3km perimeter, wide roads, 5-7am"),("Vetal Hill","18.5368,73.8070","Trail, panoramic views, hilly"),("Pashan Lake","18.5424,73.7855","3km loop, peaceful, birding")],
-    "Kolkata":[("Maidan","22.5502,88.3451","3km grass loop, central, best before 8am"),("Rabindra Sarobar","22.5142,88.3609","2km lake loop, peaceful, 5-7am"),("Salt Lake","22.5764,88.4249","Wide roads, grid layout, 5:30-7am"),("Victoria Memorial","22.5448,88.3426","1.5km loop, historic, early morning")],
-    "Ahmedabad":[("Sabarmati Riverfront","23.0225,72.5714","8km paved path, flat"),("Kankaria Lake","22.9821,72.5955","3km circular, opens 6am"),("Law Garden","23.0258,72.5618","1km loop, night lit"),("ISKCON area","23.0447,72.5274","Quiet roads, wide, morning runners")],
+    "Bangalore":[
+        ("Cubbon Park","12.9763,77.5929","5.8km loop, shaded, best before 7am"),
+        ("Lalbagh Garden","12.9507,77.5848","3km loop, flat, opens 6am"),
+        ("Ulsoor Lake","12.9815,77.6214","2km loop, central, 5:30-7am"),
+        ("Nandi Hills","13.3702,77.6835","Trail runs, cool climate"),
+    ],
+    "Mumbai":[
+        ("Marine Drive","18.9322,72.8264","3.6km stretch, sea breeze, best before 7am"),
+        ("Carter Road Bandra","19.0728,72.8286","1km promenade, popular 5:30-7am"),
+        ("Sanjay Gandhi NP","19.2147,72.9110","Trail running, early morning only"),
+        ("Powai Lake","19.1196,72.9089","4km loop, 5:30-7am"),
+    ],
+    "Delhi":[
+        ("Lodhi Garden","28.5931,77.2197","2.1km loop, historic, opens 5am"),
+        ("Siri Fort","28.5491,77.2226","3km track, well lit, popular"),
+        ("Nehru Park","28.5963,77.1940","1.5km loop, shaded, safe"),
+        ("India Gate","28.6129,77.2295","Road loop, iconic, early morning only"),
+    ],
+    "Hyderabad":[
+        ("KBR National Park","17.4156,78.4347","3km trail, forest cover, opens 5am"),
+        ("Hussain Sagar Lake","17.4239,78.4738","5km loop, popular, early morning"),
+        ("Necklace Road","17.4126,78.4680","3km stretch, lake views, 5:30-7am"),
+        ("Durgam Cheruvu","17.4344,78.3876","Trail loop, rocky terrain, peaceful"),
+    ],
+    "Chennai":[
+        ("Marina Beach","13.0500,80.2824","13km stretch, flat, best before 6:30am"),
+        ("Besant Nagar Beach","13.0002,80.2707","2km stretch, less crowded"),
+        ("Guindy National Park","13.0067,80.2206","Forest trail, opens 8am, shaded"),
+        ("Adyar River walk","13.0067,80.2353","Riverside path, quiet morning"),
+    ],
+    "Pune":[
+        ("Bund Garden","18.5359,73.8794","1.5km loop, riverside, good track"),
+        ("Pune University","18.5590,73.8252","3km perimeter, wide roads, 5-7am"),
+        ("Vetal Hill","18.5368,73.8070","Trail, panoramic views, hilly"),
+        ("Pashan Lake","18.5424,73.7855","3km loop, peaceful, birding"),
+    ],
+    "Kolkata":[
+        ("Maidan","22.5502,88.3451","3km grass loop, central, best before 8am"),
+        ("Rabindra Sarobar","22.5142,88.3609","2km lake loop, peaceful, 5-7am"),
+        ("Salt Lake","22.5764,88.4249","Wide roads, grid layout, 5:30-7am"),
+        ("Victoria Memorial","22.5448,88.3426","1.5km loop, historic, early morning"),
+    ],
+    "Ahmedabad":[
+        ("Sabarmati Riverfront","23.0225,72.5714","8km paved path, flat, popular"),
+        ("Kankaria Lake","22.9821,72.5955","3km circular loop, opens 6am"),
+        ("Law Garden","23.0258,72.5618","1km loop, well lit, evening also"),
+        ("ISKCON area roads","23.0447,72.5274","Quiet wide roads, morning runners"),
+    ],
+    "Jaipur":[
+        ("Jawahar Circle Garden","26.8720,75.8236","2km loop, largest circular park, opens 5am"),
+        ("Rambagh area roads","26.8862,75.8114","Wide shaded roads, 5-7am only"),
+        ("Central Park Jaipur","26.9124,75.7873","2.5km loop, well maintained, popular"),
+        ("Nahargarh Fort road","26.9440,75.8189","Uphill trail, panoramic views, early only"),
+    ],
+    "Chandigarh":[
+        ("Sukhna Lake","30.7425,76.8175","3km paved loop, flat, best before 7am"),
+        ("Rose Garden Zakir Hussain","30.7423,76.7871","1.5km loop, fragrant, opens 6am"),
+        ("Sector 17 roads","30.7414,76.7682","Wide grid roads, early morning, flat"),
+        ("Leisure Valley","30.7333,76.7794","Linear park path, 4km one way, shaded"),
+    ],
+    "Kochi":[
+        ("Marine Drive Kochi","9.9654,76.2805","2km promenade, sea breeze, best before 7am"),
+        ("Willingdon Island roads","9.9600,76.2700","Quiet roads, low traffic, morning"),
+        ("Rajendra Maidan area","9.9312,76.2673","Open ground loop, central location"),
+        ("Bolgatty Island roads","9.9800,76.2600","Scenic backwater roads, peaceful 5:30-7am"),
+    ],
+    "Lucknow":[
+        ("Gomti Riverfront","26.8700,80.9500","4km paved path, riverside, best before 7am"),
+        ("Janeshwar Mishra Park","26.8800,80.9300","Largest park in Asia, 2.5km loop, opens 5am"),
+        ("Hazratganj area","26.8467,80.9462","Wide central roads, early morning only"),
+        ("Kukrail Forest area","26.8900,81.0100","Forest road, shaded, cool morning"),
+    ],
+    "Nagpur":[
+        ("Ambazari Lake","21.1350,79.0500","3km lake loop, best before 6:30am"),
+        ("Futala Lake","21.1650,79.0600","2km loop, popular, opens 5am"),
+        ("Seminari Hills","21.1550,79.0750","Hilly trail, panoramic view, early only"),
+        ("Kasturchand Park","21.1458,79.0882","1km loop, central, shaded, 5:30-7am"),
+    ],
+    "Indore":[
+        ("Pipliyahana Lake","22.6900,75.8400","3km loop, peaceful, opens 5:30am"),
+        ("Rajwada area roads","22.7196,75.8577","Wide heritage roads, very early morning"),
+        ("Choral Dam road","22.5800,75.7800","Scenic road run, cooler than city"),
+        ("MG Road Indore","22.7196,75.8577","Early morning road run, 5-6:30am only"),
+    ],
+    "Coimbatore":[
+        ("VOC Park","11.0168,76.9558","1.5km loop, shaded, central, opens 5am"),
+        ("Kovai Kutralam area","11.0500,76.9700","Quiet roads, residential, 5:30-7am"),
+        ("Siruvani Road","11.0300,76.8500","Scenic road run, forest edge, early only"),
+        ("GRD College area","11.0200,76.9600","Wide campus roads, 5:30-7am"),
+    ],
+    "Bhubaneswar":[
+        ("Ekamra Kanan","20.2869,85.8351","Botanical garden loop, shaded, opens 6am"),
+        ("KIIT University Campus","20.3525,85.8194","Wide internal roads, 4km loop, 5:30-7am"),
+        ("Nandankanan Road","20.3700,85.8245","Forest-edge road, cool morning, 5-7am"),
+        ("Nicco Park area","20.2637,85.8100","Flat roads, quiet morning, good surface"),
+    ],
 }
 
-# ── TYPICAL SUMMER CONDITIONS PER CITY (used in demo card) ───────
+# ── TYPICAL SUMMER CONDITIONS PER CITY ───────────────────────────
 CITY_SUMMER = {
     "Bangalore": {"aqi": 68,  "heat": 29, "hum": 72, "verdict": "GO",      "vcolor": "#4ade80", "vbg": "rgba(74,222,128,.1)",   "vmsg": "Good conditions. AQI safe, heat manageable."},
     "Mumbai":    {"aqi": 95,  "heat": 38, "hum": 86, "verdict": "GO EASY", "vcolor": "#A3E635", "vbg": "rgba(163,230,53,.1)",   "vmsg": "Humid and warm. Run easy. Hydrate well."},
@@ -53,7 +141,7 @@ CITY_SUMMER = {
     "Pune":      {"aqi": 74,  "heat": 34, "hum": 65, "verdict": "GO",      "vcolor": "#4ade80", "vbg": "rgba(74,222,128,.1)",   "vmsg": "Manageable. Best before 7am."},
     "Kolkata":   {"aqi": 110, "heat": 39, "hum": 80, "verdict": "WAIT",    "vcolor": "#FF9500", "vbg": "rgba(255,149,0,.1)",    "vmsg": "Heat + humidity combo. Very short run only."},
     "Ahmedabad": {"aqi": 92,  "heat": 43, "hum": 42, "verdict": "WAIT",    "vcolor": "#FF9500", "vbg": "rgba(255,149,0,.1)",    "vmsg": "Extreme heat. Morning only, keep it short."},
-    "Jaipur":    {"aqi": 105, "heat": 44, "hum": 38, "verdict": "WAIT",    "vcolor": "#FF9500", "vbg": "rgba(255,149,0,.1)",    "vmsg": "Very hot. Avoid midday completely."},
+    "Jaipur":    {"aqi": 105, "heat": 44, "hum": 38, "verdict": "WAIT",    "vcolor": "#FF9500", "vbg": "rgba(255,149,0,.1)",    "vmsg": "Very hot. 5:30am only, keep it very short."},
     "Chandigarh":{"aqi": 82,  "heat": 36, "hum": 55, "verdict": "GO EASY", "vcolor": "#A3E635", "vbg": "rgba(163,230,53,.1)",   "vmsg": "Warm. Early morning run is fine at easy pace."},
     "Kochi":     {"aqi": 55,  "heat": 36, "hum": 88, "verdict": "GO EASY", "vcolor": "#A3E635", "vbg": "rgba(163,230,53,.1)",   "vmsg": "Monsoon humidity. Run before 7am."},
     "Lucknow":   {"aqi": 135, "heat": 41, "hum": 52, "verdict": "WAIT",    "vcolor": "#FF9500", "vbg": "rgba(255,149,0,.1)",    "vmsg": "AQI elevated + heat. Short morning run only."},
@@ -274,21 +362,17 @@ def places_card_html(city):
     )
 
 def conditions_widget_html(city):
-    # Static demo card showing typical summer conditions — looks like the real app
     c = CITY_SUMMER.get(city, CITY_SUMMER["Bangalore"])
-    verdict   = c["verdict"]
-    vcolor    = c["vcolor"]
-    vbg       = c["vbg"]
-    vmsg      = c["vmsg"]
-    aqi       = str(c["aqi"])
-    heat      = str(c["heat"])
-    hum       = str(c["hum"])
-
-    # AQI color
+    verdict  = c["verdict"]
+    vcolor   = c["vcolor"]
+    vbg      = c["vbg"]
+    vmsg     = c["vmsg"]
+    aqi      = str(c["aqi"])
+    heat     = str(c["heat"])
+    hum      = str(c["hum"])
     if c["aqi"] > 150:  aqi_color = "#ff4444"
     elif c["aqi"] > 100: aqi_color = "#FF9500"
     else:               aqi_color = "#4ade80"
-
     return (
         '<div style="background:#0a0a0a;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px;margin:36px 0">'
         '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">'
@@ -296,33 +380,21 @@ def conditions_widget_html(city):
         '<div style="font-size:10px;color:#333;letter-spacing:1px;text-transform:uppercase">' + city.upper() + '</div>'
         '</div>'
         '<div style="font-size:12px;color:#333;margin-bottom:18px;font-style:italic">Example of what PACER shows every morning</div>'
-
-        # 3 metric tiles
         '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">'
-
         '<div style="background:rgba(255,255,255,.04);border-radius:10px;padding:14px;text-align:center">'
         '<div style="font-size:24px;font-weight:800;color:' + aqi_color + '">' + aqi + '</div>'
-        '<div style="font-size:10px;color:#555;margin-top:4px;letter-spacing:1px;text-transform:uppercase">AQI</div>'
-        '</div>'
-
+        '<div style="font-size:10px;color:#555;margin-top:4px;letter-spacing:1px;text-transform:uppercase">AQI</div></div>'
         '<div style="background:rgba(255,255,255,.04);border-radius:10px;padding:14px;text-align:center">'
         '<div style="font-size:24px;font-weight:800;color:#fff">' + heat + '°C</div>'
-        '<div style="font-size:10px;color:#555;margin-top:4px;letter-spacing:1px;text-transform:uppercase">Heat Index</div>'
-        '</div>'
-
+        '<div style="font-size:10px;color:#555;margin-top:4px;letter-spacing:1px;text-transform:uppercase">Heat Index</div></div>'
         '<div style="background:rgba(255,255,255,.04);border-radius:10px;padding:14px;text-align:center">'
         '<div style="font-size:24px;font-weight:800;color:#fff">' + hum + '%</div>'
-        '<div style="font-size:10px;color:#555;margin-top:4px;letter-spacing:1px;text-transform:uppercase">Humidity</div>'
+        '<div style="font-size:10px;color:#555;margin-top:4px;letter-spacing:1px;text-transform:uppercase">Humidity</div></div>'
         '</div>'
-
-        '</div>'
-
-        # Verdict pill
         '<div style="background:' + vbg + ';border:1px solid ' + vcolor + '40;border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:18px">'
         '<div style="font-size:22px;font-weight:900;letter-spacing:1px;color:' + vcolor + ';min-width:80px">' + verdict + '</div>'
         '<div style="font-size:13px;color:#777;line-height:1.5">' + vmsg + '</div>'
         '</div>'
-
         '<a href="https://usepacer.app" style="display:block;background:#4F9FFF;color:#000;text-align:center;padding:13px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none">Get today\'s real verdict for ' + city + ' →</a>'
         '</div>'
     )
