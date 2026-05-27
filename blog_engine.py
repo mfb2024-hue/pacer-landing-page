@@ -406,7 +406,7 @@ def build_html(md, topic):
         + card + '\n'
         + CONVERSION_STRIP + '\n'
         + bot_body + '\n'
-        + '<p class="back">Back to <a href="https://usepacer.app/blog">all running guides</a> &middot; <a href="https://usepacer.app">usepacer.app</a></p>\n'
+        + '<p class="back">Back to <a href="https://usepacer.app/blog/">all running guides</a> &middot; <a href="https://usepacer.app">usepacer.app</a></p>\n'
         + DISCLAIMER + '\n'
         '</div>\n'
         + STICKY_BAR + '\n'
@@ -425,7 +425,8 @@ def push(filename, content, msg):
     return r.status_code in (200, 201)
 
 def update_index(entries):
-    items = "\n".join('<li><a href="' + s + '.html">' + t + '</a></li>' for s, t in entries[:500])
+    # FIX: use /blog/ absolute paths so links work correctly
+    items = "\n".join('<li><a href="/blog/' + s + '.html">' + t + '</a></li>' for s, t in entries[:500])
     html = (
         '<!DOCTYPE html><html lang="en"><head>'
         '<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>'
