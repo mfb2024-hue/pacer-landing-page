@@ -139,6 +139,26 @@ textarea.f{resize:none;line-height:1.7}
 .wb{display:block;width:100%;background:var(--blue);color:#000;border-radius:10px;padding:14px;font-size:15px;font-weight:700;letter-spacing:-.2px;transition:opacity .15s;margin-top:2px}.wb:hover{opacity:.9}
 .wn{font-size:11px;color:var(--t3);text-align:center;margin-top:10px;font-weight:300}
 .werr{font-size:12px;color:#F87171;text-align:center;margin-top:8px;display:none}
+
+/* Hamburger menu */
+.hmenu-btn{background:none;border:none;cursor:pointer;padding:4px;display:flex;flex-direction:column;gap:5px;-webkit-tap-highlight-color:transparent}
+.hmenu-btn span{display:block;width:22px;height:2px;background:var(--t2);border-radius:2px;transition:all .25s}
+.hmenu-btn:hover span{background:var(--t1)}
+.hmenu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(8px)}
+.hmenu-overlay.open{opacity:1;pointer-events:all}
+.hmenu-panel{position:fixed;top:0;left:-280px;width:260px;height:100vh;background:#0C0C0C;border-right:1px solid var(--b1);z-index:201;transition:left .3s ease;padding:24px 0;display:flex;flex-direction:column}
+.hmenu-panel.open{left:0}
+.hmenu-top{display:flex;align-items:center;justify-content:space-between;padding:0 20px 24px;border-bottom:1px solid var(--b1)}
+.hmenu-brand{font-size:15px;font-weight:700;color:var(--t1)}
+.hmenu-close{background:none;border:none;color:var(--t3);font-size:22px;cursor:pointer;line-height:1;padding:2px 6px}
+.hmenu-close:hover{color:var(--t1)}
+.hmenu-links{display:flex;flex-direction:column;padding:16px 0}
+.hmenu-link{padding:14px 20px;color:var(--t2);font-size:14px;font-weight:400;text-decoration:none;transition:color .15s;border-bottom:1px solid rgba(255,255,255,.04)}
+.hmenu-link:hover{color:var(--t1);background:rgba(255,255,255,.03)}
+.hmenu-link.active{color:var(--blue);font-weight:600}
+.hmenu-footer{margin-top:auto;padding:20px;border-top:1px solid var(--b1)}
+.hmenu-footer-link{display:block;font-size:11px;color:var(--t3);margin-bottom:6px}
+
 .succ{display:none;background:var(--bD);border:1px solid var(--bB);border-radius:14px;padding:28px;text-align:center}
 .succ h3{font-size:20px;font-weight:800;color:var(--blue);letter-spacing:-.4px;margin-bottom:7px}
 .succ p{font-size:13px;color:var(--t2);line-height:1.8;margin-bottom:18px;font-weight:300}
@@ -159,9 +179,13 @@ footer{border-top:1px solid var(--b1);padding:20px}
 <body>
 
 <nav>
+  <div style="display:flex;align-items:center;gap:12px">
+    <button class="hmenu-btn" onclick="openMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   <div class="nl">
     <span class="nn">PACER</span><span class="nb">Beta</span>
-  </div>
+  </div></div>
   <div class="nr">
     <a href="https://instagram.com/pacerindia" target="_blank" class="nig">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="3"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
@@ -394,5 +418,41 @@ async function submitData(q){
   }
 }
 </script>
+
+<!-- Hamburger Menu -->
+<div class="hmenu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+<div class="hmenu-panel" id="menuPanel">
+  <div class="hmenu-top">
+    <span class="hmenu-brand">PACER</span>
+    <button class="hmenu-close" onclick="closeMenu()">×</button>
+  </div>
+  <div class="hmenu-links">
+    <a href="https://usepacer.app" class="hmenu-link active">Home</a>
+    <a href="https://usepacer.app/blog" class="hmenu-link" id="hmenu-blog">
+      Blog
+      <span style="display:block;font-size:11px;color:#555;font-weight:300;margin-top:2px">Running guides for India</span>
+    </a>
+    <a href="#wl" class="hmenu-link hmenu-cta" onclick="closeMenu()" style="color:#4F9FFF;font-weight:600">Early Access</a>
+  </div>
+  <div class="hmenu-footer">
+    <a href="https://instagram.com/pacerindia" target="_blank" class="hmenu-footer-link">@pacerindia on Instagram</a>
+    <a href="https://usepacer.app" class="hmenu-footer-link">usepacer.app</a>
+  </div>
+</div>
+
+<script>
+function openMenu(){
+  document.getElementById('menuPanel').classList.add('open');
+  document.getElementById('menuOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeMenu(){
+  document.getElementById('menuPanel').classList.remove('open');
+  document.getElementById('menuOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeMenu(); });
+</script>
+
 </body>
 </html>
