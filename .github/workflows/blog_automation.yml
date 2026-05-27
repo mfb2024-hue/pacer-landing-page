@@ -1,15 +1,18 @@
 name: PACER Blog Automation
- 
+
 on:
   schedule:
-    - cron: '0 */8 * * *'   # every 8 hours = 3 runs/day = 21 posts/day
+    - cron: '0 */8 * * *'
   workflow_dispatch:
     inputs:
       posts_count:
         description: 'Number of posts to generate'
         required: false
         default: '7'
- 
+
+permissions:
+  contents: write
+
 jobs:
   generate-posts:
     runs-on: ubuntu-latest
