@@ -43,6 +43,26 @@ CITY_SPOTS = {
     "Ahmedabad":[("Sabarmati Riverfront","23.0225,72.5714","8km paved path, flat"),("Kankaria Lake","22.9821,72.5955","3km circular, opens 6am"),("Law Garden","23.0258,72.5618","1km loop, night lit"),("ISKCON area","23.0447,72.5274","Quiet roads, wide, morning runners")],
 }
 
+# ── TYPICAL SUMMER CONDITIONS PER CITY (used in demo card) ───────
+CITY_SUMMER = {
+    "Bangalore": {"aqi": 68,  "heat": 29, "hum": 72, "verdict": "GO",      "vcolor": "#4ade80", "vbg": "rgba(74,222,128,.1)",   "vmsg": "Good conditions. AQI safe, heat manageable."},
+    "Mumbai":    {"aqi": 95,  "heat": 38, "hum": 86, "verdict": "GO EASY", "vcolor": "#A3E635", "vbg": "rgba(163,230,53,.1)",   "vmsg": "Humid and warm. Run easy. Hydrate well."},
+    "Delhi":     {"aqi": 158, "heat": 42, "hum": 55, "verdict": "WAIT",    "vcolor": "#FF9500", "vbg": "rgba(255,149,0,.1)",    "vmsg": "High AQI + heat. Keep it very short or skip."},
+    "Hyderabad": {"aqi": 88,  "heat": 37, "hum": 68, "verdict": "GO EASY", "vcolor": "#A3E635", "vbg": "rgba(163,230,53,.1)",   "vmsg": "Warm and humid. Reduce intensity. Hydrate."},
+    "Chennai":   {"aqi": 72,  "heat": 40, "hum": 82, "verdict": "GO EASY", "vcolor": "#A3E635", "vbg": "rgba(163,230,53,.1)",   "vmsg": "High humidity. Run before 6:30am only."},
+    "Pune":      {"aqi": 74,  "heat": 34, "hum": 65, "verdict": "GO",      "vcolor": "#4ade80", "vbg": "rgba(74,222,128,.1)",   "vmsg": "Manageable. Best before 7am."},
+    "Kolkata":   {"aqi": 110, "heat": 39, "hum": 80, "verdict": "WAIT",    "vcolor": "#FF9500", "vbg": "rgba(255,149,0,.1)",    "vmsg": "Heat + humidity combo. Very short run only."},
+    "Ahmedabad": {"aqi": 92,  "heat": 43, "hum": 42, "verdict": "WAIT",    "vcolor": "#FF9500", "vbg": "rgba(255,149,0,.1)",    "vmsg": "Extreme heat. Morning only, keep it short."},
+    "Jaipur":    {"aqi": 105, "heat": 44, "hum": 38, "verdict": "WAIT",    "vcolor": "#FF9500", "vbg": "rgba(255,149,0,.1)",    "vmsg": "Very hot. Avoid midday completely."},
+    "Chandigarh":{"aqi": 82,  "heat": 36, "hum": 55, "verdict": "GO EASY", "vcolor": "#A3E635", "vbg": "rgba(163,230,53,.1)",   "vmsg": "Warm. Early morning run is fine at easy pace."},
+    "Kochi":     {"aqi": 55,  "heat": 36, "hum": 88, "verdict": "GO EASY", "vcolor": "#A3E635", "vbg": "rgba(163,230,53,.1)",   "vmsg": "Monsoon humidity. Run before 7am."},
+    "Lucknow":   {"aqi": 135, "heat": 41, "hum": 52, "verdict": "WAIT",    "vcolor": "#FF9500", "vbg": "rgba(255,149,0,.1)",    "vmsg": "AQI elevated + heat. Short morning run only."},
+    "Nagpur":    {"aqi": 88,  "heat": 44, "hum": 45, "verdict": "WAIT",    "vcolor": "#FF9500", "vbg": "rgba(255,149,0,.1)",    "vmsg": "Extreme heat city. 5:30am only or skip."},
+    "Indore":    {"aqi": 78,  "heat": 38, "hum": 52, "verdict": "GO EASY", "vcolor": "#A3E635", "vbg": "rgba(163,230,53,.1)",   "vmsg": "Warm. Early morning with good hydration."},
+    "Coimbatore":{"aqi": 58,  "heat": 34, "hum": 70, "verdict": "GO",      "vcolor": "#4ade80", "vbg": "rgba(74,222,128,.1)",   "vmsg": "Good conditions. AQI safe, manageable heat."},
+    "Bhubaneswar":{"aqi": 82, "heat": 38, "hum": 74, "verdict": "GO EASY", "vcolor": "#A3E635", "vbg": "rgba(163,230,53,.1)",   "vmsg": "Humid. Run before 6:30am for best conditions."},
+}
+
 # ── TOPICS ───────────────────────────────────────────────────────
 CITY_TEMPLATES = [
     "best places to run in {city}",
@@ -254,50 +274,57 @@ def places_card_html(city):
     )
 
 def conditions_widget_html(city):
-    coords = CITY_COORDS.get(city, "12.9716,77.5946").split(",")
-    lat, lon = coords[0], coords[1]
-    owm = "b6907d289e10d714a6e88b30761fdd59"
+    # Static demo card showing typical summer conditions — looks like the real app
+    c = CITY_SUMMER.get(city, CITY_SUMMER["Bangalore"])
+    verdict   = c["verdict"]
+    vcolor    = c["vcolor"]
+    vbg       = c["vbg"]
+    vmsg      = c["vmsg"]
+    aqi       = str(c["aqi"])
+    heat      = str(c["heat"])
+    hum       = str(c["hum"])
+
+    # AQI color
+    if c["aqi"] > 150:  aqi_color = "#ff4444"
+    elif c["aqi"] > 100: aqi_color = "#FF9500"
+    else:               aqi_color = "#4ade80"
+
     return (
-        '<div id="pw" style="background:#0a0a0a;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px;margin:36px 0">'
-        '<div style="font-size:10px;font-weight:700;letter-spacing:3px;color:#444;text-transform:uppercase;margin-bottom:16px">PACER · LIVE CONDITIONS · ' + city.upper() + '</div>'
-        '<div id="pw-l" style="color:#555;font-size:14px">Loading conditions...</div>'
-        '<div id="pw-c" style="display:none">'
-        '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:18px">'
-        '<div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px;text-align:center"><div id="pw-aqi" style="font-size:22px;font-weight:800;color:#fff"></div><div style="font-size:10px;color:#555;margin-top:2px;letter-spacing:1px">AQI</div></div>'
-        '<div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px;text-align:center"><div id="pw-hi" style="font-size:22px;font-weight:800;color:#fff"></div><div style="font-size:10px;color:#555;margin-top:2px;letter-spacing:1px">HEAT INDEX</div></div>'
-        '<div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px;text-align:center"><div id="pw-hum" style="font-size:22px;font-weight:800;color:#fff"></div><div style="font-size:10px;color:#555;margin-top:2px;letter-spacing:1px">HUMIDITY</div></div>'
+        '<div style="background:#0a0a0a;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px;margin:36px 0">'
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">'
+        '<div style="font-size:10px;font-weight:700;letter-spacing:3px;color:#444;text-transform:uppercase">PACER · TYPICAL SUMMER CONDITIONS</div>'
+        '<div style="font-size:10px;color:#333;letter-spacing:1px;text-transform:uppercase">' + city.upper() + '</div>'
         '</div>'
-        '<div id="pw-v" style="border-radius:8px;padding:12px;margin-bottom:16px;display:flex;align-items:center;gap:12px">'
-        '<div id="pw-vt" style="font-size:18px;font-weight:900;letter-spacing:1px"></div>'
-        '<div id="pw-vm" style="font-size:13px;color:#777"></div>'
+        '<div style="font-size:12px;color:#333;margin-bottom:18px;font-style:italic">Example of what PACER shows every morning</div>'
+
+        # 3 metric tiles
+        '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">'
+
+        '<div style="background:rgba(255,255,255,.04);border-radius:10px;padding:14px;text-align:center">'
+        '<div style="font-size:24px;font-weight:800;color:' + aqi_color + '">' + aqi + '</div>'
+        '<div style="font-size:10px;color:#555;margin-top:4px;letter-spacing:1px;text-transform:uppercase">AQI</div>'
         '</div>'
-        '<a href="https://usepacer.app" style="display:block;background:#4F9FFF;color:#000;text-align:center;padding:12px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none">Get this every morning for your city</a>'
+
+        '<div style="background:rgba(255,255,255,.04);border-radius:10px;padding:14px;text-align:center">'
+        '<div style="font-size:24px;font-weight:800;color:#fff">' + heat + '°C</div>'
+        '<div style="font-size:10px;color:#555;margin-top:4px;letter-spacing:1px;text-transform:uppercase">Heat Index</div>'
         '</div>'
-        '<div id="pw-e" style="display:none;font-size:13px;color:#555">Check live conditions at <a href="https://usepacer.app" style="color:#4F9FFF">usepacer.app</a></div>'
+
+        '<div style="background:rgba(255,255,255,.04);border-radius:10px;padding:14px;text-align:center">'
+        '<div style="font-size:24px;font-weight:800;color:#fff">' + hum + '%</div>'
+        '<div style="font-size:10px;color:#555;margin-top:4px;letter-spacing:1px;text-transform:uppercase">Humidity</div>'
         '</div>'
-        '<script>'
-        '(function(){'
-        'var K="' + owm + '",lat=' + lat + ',lon=' + lon + ';'
-        'function hi(t,h){var F=t*9/5+32;return Math.round((-42.379+2.049*F+10.143*h-0.225*F*h-0.007*F*F-0.055*h*h+0.001*F*F*h+0.001*F*h*h-32)*5/9);}'
-        'function vrd(a,h){if(a>200||h>44)return{t:"REST",bg:"rgba(255,68,68,.1)",c:"#ff4444",m:"Not recommended. AQI or heat too high. Rest or train indoors."};'
-        'if(a>150||h>39)return{t:"WAIT",bg:"rgba(255,149,0,.1)",c:"#FF9500",m:"Tough conditions. Keep it very short and easy."};'
-        'if(a>100||h>34)return{t:"GO EASY",bg:"rgba(163,230,53,.1)",c:"#A3E635",m:"Doable but warm. Run at easy effort. Hydrate well."};'
-        'return{t:"GO",bg:"rgba(74,222,128,.1)",c:"#4ade80",m:"Good conditions. AQI safe, heat manageable. Good run."};}'
-        'Promise.all([fetch("https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&units=metric&appid="+K),'
-        'fetch("https://api.openweathermap.org/data/2.5/air_pollution?lat="+lat+"&lon="+lon+"&appid="+K)])'
-        '.then(function(r){return Promise.all([r[0].json(),r[1].json()])})'
-        '.then(function(d){'
-        'var t=Math.round(d[0].main.temp),h=Math.round(d[0].main.humidity),heat=hi(t,h),aqi=d[1].list[0].main.aqi*50,v=vrd(aqi,heat);'
-        'document.getElementById("pw-aqi").textContent=aqi;'
-        'document.getElementById("pw-hi").textContent=heat+"°C";'
-        'document.getElementById("pw-hum").textContent=h+"%";'
-        'var vd=document.getElementById("pw-v");vd.style.background=v.bg;vd.style.border="1px solid "+v.c+"40";'
-        'document.getElementById("pw-vt").textContent=v.t;document.getElementById("pw-vt").style.color=v.c;'
-        'document.getElementById("pw-vm").textContent=v.m;'
-        'document.getElementById("pw-l").style.display="none";document.getElementById("pw-c").style.display="block";'
-        '}).catch(function(){document.getElementById("pw-l").style.display="none";document.getElementById("pw-e").style.display="block";});'
-        '})();'
-        '</script>'
+
+        '</div>'
+
+        # Verdict pill
+        '<div style="background:' + vbg + ';border:1px solid ' + vcolor + '40;border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:18px">'
+        '<div style="font-size:22px;font-weight:900;letter-spacing:1px;color:' + vcolor + ';min-width:80px">' + verdict + '</div>'
+        '<div style="font-size:13px;color:#777;line-height:1.5">' + vmsg + '</div>'
+        '</div>'
+
+        '<a href="https://usepacer.app" style="display:block;background:#4F9FFF;color:#000;text-align:center;padding:13px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none">Get today\'s real verdict for ' + city + ' →</a>'
+        '</div>'
     )
 
 def get_contextual_card(topic):
@@ -425,7 +452,6 @@ def push(filename, content, msg):
     return r.status_code in (200, 201)
 
 def update_index(entries):
-    # FIX: use /blog/ absolute paths so links work correctly
     items = "\n".join('<li><a href="/blog/' + s + '.html">' + t + '</a></li>' for s, t in entries[:500])
     html = (
         '<!DOCTYPE html><html lang="en"><head>'
